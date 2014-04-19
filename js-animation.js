@@ -1,10 +1,15 @@
- $.fn.animation = function(jcont,anims,loop,cb) {
+$.fn.animation = function(anims,loop,cb) {
+    jcont = $(this);
     if (jcont.length < 1) return false;
     if (!jcont.hasClass("animated")) jcont.addClass("animated");   
+    if (loop) {
+        //if (!jcont.hasClass("infinite")) jcont.addClass("infinite");   
+    }
     var a = 0;
     var total = anims.length;
     jcont.addClass(anims[a]);
     jcont.on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        console.log("ended");
         nextAnim();  
     });
     function nextAnim() {
@@ -25,6 +30,7 @@
             }
         }
         if (a<total) {
+            console.log("start anim",anims[a]);
             jcont.addClass(anims[a]);
         }
     }
